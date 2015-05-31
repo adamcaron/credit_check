@@ -1,27 +1,21 @@
 card_number = "4929735477250543"
-
 valid = false
 
-# Your Luhn Algorithm Here
+# Luhn Algorithm
 
-digits = card_number.chars.map.each {|digit| digit.to_i}
 # From the rightmost digit, moving left, double the value of every second digit.
-puts "Original array: #{digits.inspect}"
+digits = card_number.chars.map.each {|digit| digit.to_i}
 digits.reverse!
-puts "Reversed array: #{digits.inspect}"
-every_other = []
-
+doubled = []
 digits.each_index do |d|
   d.odd? ?
-  every_other << digits[d] * 2
-  : every_other << digits[d]
+  doubled << digits[d] * 2
+  : doubled << digits[d]
 end
-puts "Doubled array: #{every_other.inspect}"
 
-# Summed digits over 10
-
+# Sums the digits of double-digit integers
 summed = []
-every_other.each do |integer|
+doubled.each do |integer|
   if integer > 9
     sum = integer.to_s.chars
     summed << sum[0].to_i + sum[1].to_i
@@ -29,8 +23,12 @@ every_other.each do |integer|
     summed << integer
   end
 end
-puts "Summed array: #{summed.inspect}"
+result = summed.inject{ |sum, x| sum + x }
 
 # Output
-## If it is valid, print "The number is valid!"
-## If it is invalid, print "The number is invalid!"
+if result % 10 == 0
+  valid = true
+  puts "The number is valid!"
+else
+  puts "The number is invalid!"
+end
