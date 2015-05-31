@@ -16,15 +16,20 @@ digits.each_index do |d|
   every_other << digits[d] * 2
   : every_other << digits[d]
 end
-puts "New array: #{every_other.inspect}"
+puts "Doubled array: #{every_other.inspect}"
 
 # Summed digits over 10
 
-# every_other.each do |d|
-#   if d.is_a? Fixnum && d > 9
-#     puts d
-#   end
-# end
+summed = []
+every_other.each do |integer|
+  if integer > 9
+    sum = integer.to_s.chars
+    summed << sum[0].to_i + sum[1].to_i
+  else
+    summed << integer
+  end
+end
+puts "Summed array: #{summed.inspect}"
 
 # Output
 ## If it is valid, print "The number is valid!"
